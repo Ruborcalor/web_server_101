@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Web Servers 101</title>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="reveal.js/dist/theme/moon.css" id="theme"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Web Servers 101</h1><p class="date">Created: 2021-02-08 Mon 23:13</p>
+</section>
+
+<section>
+<section id="slide-orgaf33d90">
+<h2 id="orgaf33d90">Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-1">1. Bootcamp Overview</a></li>
+<li><a href="#/slide-2">2. How The Web Works</a></li>
+<li><a href="#/slide-3">3. Coding Our First Server</a></li>
+<li><a href="#/slide-4">4. Resources</a></li>
+</ul>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-1">
+<h2 id="1"><span class="section-number-2">1</span> Bootcamp Overview</h2>
+<p>
+This is the first of a series of eight workshops:
+</p>
+<ol>
+<li>Websites 101</li>
+<li>Learn ExpressJS</li>
+<li>Databases and Software Testing with MongoDB</li>
+<li>etc</li>
+
+</ol>
+
+
+</section>
+</section>
+<section>
+<section id="slide-2">
+<h2 id="2"><span class="section-number-2">2</span> How The Web Works</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+</section>
+<section id="slide-2-1">
+<h3 id="2-1"><span class="section-number-3">2.1</span> Clients and Servers</h3>
+<p>
+Computers connected to the web are called clients and servers.
+<img src="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works/simple-client-server.png" alt="simple-client-server.png" />
+</p>
+
+
+<aside class="notes">
+<p>
+The web is built on the idea of clients and servers.
+</p>
+
+<p>
+This is a simplified diagram of how they might look.
+</p>
+
+<ul>
+<li>Clients are the typical web user's internet-connected devices (for example, your computer connected to your Wi-Fi, or your phone connected to your mobile network) and web-accessing software available on those devices (usually a web browser like Firefox or Chrome). In one line, they are the ones making requests to servers.</li>
+<li>Servers are computers that store webpages, sites, or apps. When a client device wants to access a webpage, a copy of the webpage is downloaded from the server onto the client machine to be displayed in the user's web browser. In one line, they are the ones handling/responding to requests from clients.</li>
+
+</ul>
+
+</aside>
+
+</section>
+<section id="slide-2-2">
+<h3 id="2-2"><span class="section-number-3">2.2</span> What is a request?</h3>
+<p>
+When one computer (the client) asks another computer (the server) for information, it is making a network request.
+</p>
+
+<p>
+There are many different types of requests Requests can come in many different formats. Think of them like different languages.
+</p>
+
+<p>
+HTTP, SFTP, SMTP, SNMP, etc
+</p>
+
+<aside class="notes">
+<p>
+Humans speak many different languages. Same with computers when they "speak" (communicate) with one another. HTTP is one computer language that is ubiquitous on the web.
+</p>
+
+<p>
+It kicks off a client-server interaction where the client is the machine making the request, and the server is the machine handling/responding to the request.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-2-3">
+<h3 id="2-3"><span class="section-number-3">2.3</span> What does an HTTP (Hypertext Transfer Protocol) request look like?</h3>
+<div class="column" style="float:left; width: 50%; text-align: left;">
+<p>
+Every request via HTTP contains:
+</p>
+<ul>
+<li>a method</li>
+<li>the requested endpoint</li>
+<li>arguments</li>
+
+</ul>
+</div>
+
+<div class="column" style="float:right; width: 50%; text-align: left; font-size: 0.8em">
+<p>
+Methods include:
+</p>
+<dl>
+<dt>GET</dt><dd>Get data from the server</dd>
+<dt>POST</dt><dd>Send data to the server</dd>
+<dt>PUT</dt><dd>Update data on the server</dd>
+<dt>DELETE</dt><dd>Delete data on the server</dd>
+
+</dl>
+</div>
+
+<aside class="notes">
+<p>
+These are conventions!
+</p>
+
+</aside>
+
+</section>
+<section id="slide-2-4">
+<h3 id="2-4"><span class="section-number-3">2.4</span> What about an HTTP response?</h3>
+<div class="column" style="float:left; width: 50%">
+<p>
+Responses are shaped very similar to requests. The main notable difference is that in the place of request types they have status codes.
+</p>
+</div>
+
+<div class="column" style="float:right; width: 50%">
+<ul>
+<li>200 OK</li>
+<li>404 Not Found</li>
+<li>500 Internal Server Error</li>
+
+</ul>
+</div>
+
+<aside class="notes">
+<p>
+Again, the status code meanings are convention! Theoretically you could response with whatever status code you want as long as the client knows how to handle it.
+</p>
+
+</aside>
+</section>
+<section id="slide-2-5">
+<h3 id="2-5"><span class="section-number-3">2.5</span> Entering a url into a browser</h3>
+<aside class="notes">
+<p>
+Learn by understanding what happens when you enter a url into the browser.
+</p>
+
+<p>
+For our purposes it isn't important to understand things like DNS.
+</p>
+
+<p>
+Extra info:
+</p>
+<ul>
+<li>The browser goes to the domain name server, which provides a map for getting to the server relevant to the domain</li>
+<li>The request is sent to a specific port on the server. This lets the server know which process should handle the request.</li>
+<li></li>
+
+</ul>
+
+</aside>
+
+
+<div id="orge1fcbec" class="figure">
+<p><img src="https://doepud.co.uk/images/blogs/complex_url.png" alt="complex_url.png" />
+</p>
+</div>
+<div class="column" style="text-align: left; font-size: 0.8em">
+<ul>
+<li>The browser dispatches a GET request to the server linked with the domain name.</li>
+<li>The server receives and approvers the client's request, and then sends back the web page</li>
+<li>Your computer receives the response and the browser displays the website to you</li>
+
+</ul>
+</div>
+
+</section>
+<section id="slide-2-6">
+<h3 id="2-6"><span class="section-number-3">2.6</span> How does a server know what to do when it receives a request?</h3>
+<p>
+Think of requests in terms of remote code execution:
+</p>
+<ul>
+<li>the server uses the request method and endpoint in order to decide on a "function" it should run</li>
+<li>the server passes the request arguments to the function and runs it</li>
+<li>the server responds with the result of the function</li>
+
+</ul>
+
+<aside class="notes">
+<p>
+No request arguments when making a simple page request.
+</p>
+
+<p>
+Here the "server" is really the backend process that is running on the server. The server uses the port number to identify which process it should forward the request to.
+</p>
+
+<p>
+If you request /leaderboard a different function will run than if you request /users.
+(sometimes there aren't any request arguments)
+</p>
+
+<p>
+Example is simple web page. Think of the function as a simple function that takes no arguments and returns the same string everytime.
+</p>
+
+<p>
+A helpful view is to see HTTP requests as a way for one machine to request that another machine runs a certain function with certain parameters and return the results back to your local computer.
+</p>
+
+<p>
+The server doesn't do anything when it isn't getting requests. It is just waiting for requests to come in.
+</p>
+
+</aside>
+
+
+</section>
+</section>
+<section>
+<section id="slide-3">
+<h2 id="3"><span class="section-number-2">3</span> Coding Our First Server</h2>
+<p>
+Many technologies exist for you to write backends in your favorite programming languages!
+</p>
+<ul>
+<li>Express (Javascript)</li>
+<li>Flask (Python)</li>
+<li>Spring (Java)</li>
+<li>Ruby on Rails (Ruby)</li>
+
+</ul>
+
+<aside class="notes">
+<p>
+Now we understand the client server relationship. How do we make a server of our own that we can send requests to?
+</p>
+
+<p>
+<a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Web_frameworks">https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Web_frameworks</a>
+</p>
+
+<p>
+Server-side web frameworks (a.k.a. "web application frameworks") are software frameworks that make it easier to write, maintain and scale web applications. They provide tools and libraries that simplify common web development tasks, including routing URLs to appropriate handlers, interacting with databases, supporting sessions and user authorization, formatting output (e.g. HTML, JSON, XML), and improving security against web attacks.
+</p>
+
+<p>
+The point of web frameworks is to make things easier for you. Code at a higher level than working directly with http requests. Let the framework do some of the heavy lifting for you for common use cases.
+</p>
+
+<p>
+Node web server with and without framework:
+<a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Node_server_without_framework">https://developer.mozilla.org/en-US/docs/Learn/Server-side/Node_server_without_framework</a>
+</p>
+
+</aside>
+
+</section>
+<section id="slide-3-1">
+<h3 id="3-1"><span class="section-number-3">3.1</span> Functions</h3>
+<div class="org-src-container">
+
+<pre class="src src-javascript"><span style="color: #4f97d7; font-weight: bold;">import</span> <span style="color: #4f97d7;">{</span> Router <span style="color: #4f97d7;">}</span> from <span style="color: #2d9574;">'express'</span>
+<span style="color: #4f97d7; font-weight: bold;">import</span> <span style="color: #4f97d7;">{</span> getTodos, addTodo, updateTodo, deleteTodo <span style="color: #4f97d7;">}</span> from <span style="color: #2d9574;">'../controllers/todos'</span>
+
+<span style="color: #4f97d7; font-weight: bold;">const</span> <span style="color: #7590db;">router</span>: Router = Router<span style="color: #4f97d7;">()</span>
+
+router.get<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'/todos'</span>, getTodos<span style="color: #4f97d7;">)</span>
+router.post<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'/add-todo'</span>, addTodo<span style="color: #4f97d7;">)</span>
+router.put<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'/edit-todo/:id'</span>, updateTodo<span style="color: #4f97d7;">)</span>
+router.<span style="color: #4f97d7; font-weight: bold;">delete</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'/delete-todo/:id'</span>, deleteTodo<span style="color: #4f97d7;">)</span>
+
+<span style="color: #4f97d7; font-weight: bold;">export</span> <span style="color: #4f97d7; font-weight: bold;">default</span> router
+</pre>
+</div>
+
+<aside class="notes">
+<p>
+Sneak peak from later workshop.
+</p>
+
+<p>
+Demonstrates idea as each route/endpoint being responsible for a function.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-3-2">
+<h3 id="3-2"><span class="section-number-3">3.2</span> Hello World</h3>
+<div class="org-src-container">
+
+<pre class="src src-javascript"><span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">import the express framework</span>
+<span style="color: #4f97d7; font-weight: bold;">const</span> <span style="color: #7590db;">express</span> = require<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'express'</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">initialize an express app</span>
+<span style="color: #4f97d7; font-weight: bold;">const</span> <span style="color: #7590db;">app</span> = express<span style="color: #4f97d7;">()</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">tell the express app to handle requests on endpoint '/'</span>
+app.get<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'/'</span>, <span style="color: #bc6ec5;">(</span>req, res<span style="color: #bc6ec5;">)</span> =&gt; <span style="color: #bc6ec5;">{</span>
+  <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">tell the express app to respond with 'Hello World!'</span>
+  res.send<span style="color: #2d9574;">(</span><span style="color: #2d9574;">'Hello World!'</span><span style="color: #2d9574;">)</span>
+<span style="color: #bc6ec5;">}</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">tell the express app to start listening on port 3000</span>
+<span style="color: #4f97d7; font-weight: bold;">const</span> <span style="color: #7590db;">port</span> = <span style="color: #a45bad;">3000</span>
+app.listen<span style="color: #4f97d7;">(</span>port, <span style="color: #bc6ec5;">()</span> =&gt; <span style="color: #bc6ec5;">{</span>
+  console.log<span style="color: #2d9574;">(</span><span style="color: #2d9574;">`Example app listening at http://localhost:${port}`</span><span style="color: #2d9574;">)</span>
+<span style="color: #bc6ec5;">}</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<aside class="notes">
+<p>
+<a href="https://expressjs.com/en/api.html#req">https://expressjs.com/en/api.html#req</a>
+The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on. In this documentation and by convention, the object is always referred to as req (and the HTTP response is res) but its actual name is determined by the parameters to the callback function in which you’re working.
+</p>
+
+<p>
+req has info like:
+</p>
+<ul>
+<li>baseUrl</li>
+<li>body</li>
+<li>method</li>
+<li>params</li>
+<li>etc</li>
+
+</ul>
+
+<p>
+The res object represents the HTTP response that an Express app sends back when handling an HTTP request.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-3-3">
+<h3 id="3-3"><span class="section-number-3">3.3</span> Postman Demo</h3>
+<p>
+Let's have some fun with postman!
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-4">
+<h2 id="4"><span class="section-number-2">4</span> Resources</h2>
+<p>
+MDN is your friend: <a href="https://developer.mozilla.org/en-US/docs/Learn">Learn web development</a>
+</p>
+
+<p>
+Helpful links:
+</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/How_does_the_Internet_work">How does the internet work</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works">How the web works</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP">HTTP</a></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="reveal.js/dist/reveal.js"></script>
+<script src="reveal.js/plugin/markdown/markdown.js"></script>
+<script src="reveal.js/plugin/notes/notes.js"></script>
+<script src="reveal.js/plugin/search/search.js"></script>
+<script src="reveal.js/plugin/zoom/zoom.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+
+overview: true,
+
+transition: 'convex',
+transitionSpeed: 'default',
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealMarkdown, RevealNotes, RevealSearch, RevealZoom ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>
