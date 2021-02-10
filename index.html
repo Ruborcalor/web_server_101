@@ -3,23 +3,24 @@
 <head>
 <meta charset="utf-8"/>
 <title>Web Servers 101</title>
+<meta name="author" content="Cole Killian"/>
 <style type="text/css">
 .underline { text-decoration: underline; }
 </style>
-<link rel="stylesheet" href="reveal.js/dist/reveal.css"/>
+<link rel="stylesheet" href="file:///home/cole/Projects/reveal.js/dist/reveal.css"/>
 
-<link rel="stylesheet" href="reveal.js/dist/theme/moon.css" id="theme"/>
+<link rel="stylesheet" href="file:///home/cole/Projects/reveal.js/dist/theme/moon.css" id="theme"/>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
 <section id="sec-title-slide">
-<h1 class="title">Web Servers 101</h1><p class="date">Created: 2021-02-08 Mon 23:13</p>
+<h1>Web Servers 101</h1><div>Diving in to the fundamentals of the web</div>
 </section>
 
 <section>
-<section id="slide-orgaf33d90">
-<h2 id="orgaf33d90">Table of Contents</h2>
+<section id="slide-org460e03f">
+<h2 id="org460e03f">Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#/slide-1">1. Bootcamp Overview</a></li>
@@ -36,7 +37,7 @@
 <section id="slide-1">
 <h2 id="1"><span class="section-number-2">1</span> Bootcamp Overview</h2>
 <p>
-This is the first of a series of eight workshops:
+This is the first in a series of eight workshops:
 </p>
 <ol>
 <li>Websites 101</li>
@@ -88,11 +89,11 @@ When one computer (the client) asks another computer (the server) for informatio
 </p>
 
 <p>
-There are many different types of requests Requests can come in many different formats. Think of them like different languages.
+There are many different types of request "languages".
 </p>
 
 <p>
-HTTP, SFTP, SMTP, SNMP, etc
+HTTP (Hypertext Transfer Protocol), SFTP, SMTP, SNMP, etc
 </p>
 
 <aside class="notes">
@@ -108,20 +109,32 @@ It kicks off a client-server interaction where the client is the machine making 
 
 </section>
 <section id="slide-2-3">
-<h3 id="2-3"><span class="section-number-3">2.3</span> What does an HTTP (Hypertext Transfer Protocol) request look like?</h3>
-<div class="column" style="float:left; width: 50%; text-align: left;">
+<h3 id="2-3"><span class="section-number-3">2.3</span> What does an HTTP request look like?</h3>
 <p>
-Every request via HTTP contains:
+Every HTTP request contains:
 </p>
 <ul>
 <li>a method</li>
-<li>the requested endpoint</li>
+<li>a requested endpoint</li>
 <li>arguments</li>
 
 </ul>
-</div>
 
-<div class="column" style="float:right; width: 50%; text-align: left; font-size: 0.8em">
+<aside class="notes">
+<p>
+This is a simplification, but gets the important components of an HTTP request.
+</p>
+
+<p>
+Right now this seems a bit abstract but we will look more into it. Remember to think about it as defining a computer language. Suppose Moe and I are computers and I am trying to send him a request. The computers communicate something like:
+I'm sending you a request. The method is "GET". The endpoint is "/users". The arguments are "id=3".
+</p>
+
+</aside>
+
+</section>
+<section id="slide-2-4">
+<h3 id="2-4"><span class="section-number-3">2.4</span> What does an HTTP request method look like?</h3>
 <p>
 Methods include:
 </p>
@@ -132,80 +145,77 @@ Methods include:
 <dt>DELETE</dt><dd>Delete data on the server</dd>
 
 </dl>
-</div>
 
 <aside class="notes">
 <p>
 These are conventions!
 </p>
 
-</aside>
-
-</section>
-<section id="slide-2-4">
-<h3 id="2-4"><span class="section-number-3">2.4</span> What about an HTTP response?</h3>
-<div class="column" style="float:left; width: 50%">
 <p>
-Responses are shaped very similar to requests. The main notable difference is that in the place of request types they have status codes.
+<a href="https://www.w3schools.com/tags/ref_httpmethods.asp">https://www.w3schools.com/tags/ref_httpmethods.asp</a>
+<a href="https://flaviocopes.com/http-request/">https://flaviocopes.com/http-request/</a>
 </p>
-</div>
 
-<div class="column" style="float:right; width: 50%">
-<ul>
-<li>200 OK</li>
-<li>404 Not Found</li>
-<li>500 Internal Server Error</li>
-
-</ul>
-</div>
-
-<aside class="notes">
 <p>
-Again, the status code meanings are convention! Theoretically you could response with whatever status code you want as long as the client knows how to handle it.
+<code>/test/demo_form.php?name1=value1&amp;name2=value2</code>
 </p>
 
 </aside>
+
 </section>
 <section id="slide-2-5">
-<h3 id="2-5"><span class="section-number-3">2.5</span> Entering a url into a browser</h3>
+<h3 id="2-5"><span class="section-number-3">2.5</span> What does an HTTP request endpoint look like?</h3>
+<p>
+Example endpoints:
+</p>
+<ul>
+<li><code>https://example.com/</code></li>
+<li><code>https://example.com/en-US/docs/Learn/</code></li>
+<li><code>https://example.com/users</code></li>
+<li><code>https://example.com/leaderboard</code></li>
+<li><code>https://developer.mozilla.org/en-US/docs/</code></li>
+
+</ul>
+
 <aside class="notes">
 <p>
-Learn by understanding what happens when you enter a url into the browser.
+Simplification.
 </p>
 
 <p>
-For our purposes it isn't important to understand things like DNS.
+Really the domain is handled separately from http, and http just carries the path at the end.
 </p>
-
-<p>
-Extra info:
-</p>
-<ul>
-<li>The browser goes to the domain name server, which provides a map for getting to the server relevant to the domain</li>
-<li>The request is sent to a specific port on the server. This lets the server know which process should handle the request.</li>
-<li></li>
-
-</ul>
 
 </aside>
-
-
-<div id="orge1fcbec" class="figure">
-<p><img src="https://doepud.co.uk/images/blogs/complex_url.png" alt="complex_url.png" />
-</p>
-</div>
-<div class="column" style="text-align: left; font-size: 0.8em">
-<ul>
-<li>The browser dispatches a GET request to the server linked with the domain name.</li>
-<li>The server receives and approvers the client's request, and then sends back the web page</li>
-<li>Your computer receives the response and the browser displays the website to you</li>
-
-</ul>
-</div>
 
 </section>
 <section id="slide-2-6">
-<h3 id="2-6"><span class="section-number-3">2.6</span> How does a server know what to do when it receives a request?</h3>
+<h3 id="2-6"><span class="section-number-3">2.6</span> What do HTTP request arguments look like?</h3>
+<p>
+Think of the request arguments as a list of key value pairs sent along with the request.
+</p>
+<ul>
+<li>key1: value1</li>
+<li>key2: value2</li>
+
+</ul>
+
+</section>
+<section id="slide-2-7">
+<h3 id="2-7"><span class="section-number-3">2.7</span> Putting the parts of an HTTP request together</h3>
+<p>
+Suppose we type the following into a web browser:
+</p>
+
+
+<div id="orga5d409b" class="figure">
+<p><img src="https://doepud.co.uk/images/blogs/complex_url.png" alt="complex_url.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-2-8">
+<h3 id="2-8"><span class="section-number-3">2.8</span> How does a server know what to do when it receives a request?</h3>
 <p>
 Think of requests in terms of remote code execution:
 </p>
@@ -243,6 +253,68 @@ The server doesn't do anything when it isn't getting requests. It is just waitin
 </p>
 
 </aside>
+
+</section>
+<section id="slide-2-9">
+<h3 id="2-9"><span class="section-number-3">2.9</span> What about an HTTP response?</h3>
+<div class="column" style="float:left; width: 50%">
+<p>
+Responses are shaped very similar to requests. The main notable difference is that in the place of method types they have status codes.
+</p>
+</div>
+
+<div class="column" style="float:right; width: 50%">
+<ul>
+<li>200 OK</li>
+<li>404 Not Found</li>
+<li>500 Internal Server Error</li>
+
+</ul>
+</div>
+
+<aside class="notes">
+<p>
+Again, the status code meanings are convention! Theoretically you could response with whatever status code you want as long as the client knows how to handle it.
+</p>
+
+</aside>
+</section>
+<section id="slide-2-10">
+<h3 id="2-10"><span class="section-number-3">2.10</span> Entering a url into a browser</h3>
+<aside class="notes">
+<p>
+Learn by understanding what happens when you enter a url into the browser.
+</p>
+
+<p>
+For our purposes it isn't important to understand things like DNS.
+</p>
+
+<p>
+Extra info:
+</p>
+<ul>
+<li>The browser goes to the domain name server, which provides a map for getting to the server relevant to the domain</li>
+<li>The request is sent to a specific port on the server. This lets the server know which process should handle the request.</li>
+<li></li>
+
+</ul>
+
+</aside>
+
+
+<div id="org149cff8" class="figure">
+<p><img src="https://doepud.co.uk/images/blogs/complex_url.png" alt="complex_url.png" />
+</p>
+</div>
+<div class="column" style="text-align: left; font-size: 0.8em">
+<ul>
+<li>The browser dispatches a GET request to the server linked with the domain name.</li>
+<li>The server receives and runs a function based on the request, and then sends back the web page</li>
+<li>Your computer receives the response and the browser displays the website to you</li>
+
+</ul>
+</div>
 
 
 </section>
@@ -393,11 +465,11 @@ Helpful links:
 </section>
 </div>
 </div>
-<script src="reveal.js/dist/reveal.js"></script>
-<script src="reveal.js/plugin/markdown/markdown.js"></script>
-<script src="reveal.js/plugin/notes/notes.js"></script>
-<script src="reveal.js/plugin/search/search.js"></script>
-<script src="reveal.js/plugin/zoom/zoom.js"></script>
+<script src="file:///home/cole/Projects/reveal.js/dist/reveal.js"></script>
+<script src="file:///home/cole/Projects/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="file:///home/cole/Projects/reveal.js/plugin/notes/notes.js"></script>
+<script src="file:///home/cole/Projects/reveal.js/plugin/search/search.js"></script>
+<script src="file:///home/cole/Projects/reveal.js/plugin/zoom/zoom.js"></script>
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
