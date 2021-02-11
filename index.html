@@ -7,9 +7,9 @@
 <style type="text/css">
 .underline { text-decoration: underline; }
 </style>
-<link rel="stylesheet" href="file:///home/cole/Projects/reveal.js/dist/reveal.css"/>
+<link rel="stylesheet" href="reveal.js/dist/reveal.css"/>
 
-<link rel="stylesheet" href="file:///home/cole/Projects/reveal.js/dist/theme/moon.css" id="theme"/>
+<link rel="stylesheet" href="reveal.js/dist/theme/moon.css" id="theme"/>
 </head>
 <body>
 <div class="reveal">
@@ -19,34 +19,66 @@
 </section>
 
 <section>
-<section id="slide-org460e03f">
-<h2 id="org460e03f">Table of Contents</h2>
+<section id="slide-orgf0310df">
+<h2 id="orgf0310df">Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#/slide-1">1. Bootcamp Overview</a></li>
+<li><a href="#/slide-1">1. Todo App Demo</a></li>
 <li><a href="#/slide-2">2. How The Web Works</a></li>
-<li><a href="#/slide-3">3. Coding Our First Server</a></li>
-<li><a href="#/slide-4">4. Resources</a></li>
+<li><a href="#/slide-3">3. Postman Demo</a></li>
+<li><a href="#/slide-4">4. Coding Our First Server</a></li>
+<li><a href="#/slide-5">5. Next Steps</a></li>
+<li><a href="#/slide-6">6. Resources</a></li>
 </ul>
 </div>
-
 
 </section>
 </section>
 <section>
 <section id="slide-1">
-<h2 id="1"><span class="section-number-2">1</span> Bootcamp Overview</h2>
+<h2 id="1"><span class="section-number-2">1</span> Todo App Demo</h2>
+<aside class="notes">
 <p>
-This is the first in a series of eight workshops:
+Begin with a demo of the todo app to help motivate what follows.
 </p>
-<ol>
-<li>Websites 101</li>
-<li>Learn ExpressJS</li>
-<li>Databases and Software Testing with MongoDB</li>
-<li>etc</li>
 
-</ol>
+<p>
+Show the functionalities:
+</p>
+<ul>
+<li>Create a todo</li>
+<li>Read a todo (when loading the page)</li>
+<li>Update a todo (toggle it's completed status)</li>
+<li>Delete a todo</li>
 
+</ul>
+
+<p>
+These are the main functionalities of the app.
+</p>
+
+<p>
+High level overview is that:
+</p>
+<ul>
+<li>your browser interacts with the server</li>
+<li>the server interacts with a database</li>
+
+</ul>
+
+<p>
+How does your computer communicate with the server in a way that the server can understand what to do?
+</p>
+
+<p>
+Think of HTTP requests as "dictionaries" or "json". Basically key value pairs that the server uses in order to understand what it should do.
+</p>
+
+<p>
+Do I want to show both postman and the network requests panel?
+</p>
+
+</aside>
 
 </section>
 </section>
@@ -110,24 +142,53 @@ It kicks off a client-server interaction where the client is the machine making 
 </section>
 <section id="slide-2-3">
 <h3 id="2-3"><span class="section-number-3">2.3</span> What does an HTTP request look like?</h3>
+<div style="font-size: 1.9rem">
 <p>
-Every HTTP request contains:
+The server receives a <code>req</code> (request) object with the following properties:
 </p>
-<ul>
-<li>a method</li>
-<li>a requested endpoint</li>
-<li>arguments</li>
+<dl>
+<dt>req.method</dt><dd>Categorizes the intention of the request</dd>
+<dt>req.path</dt><dd>Path to the requested resource</dd>
+<dt>req.header</dt><dd>Request meta data</dd>
+<dt>req.params</dt><dd>Arguments</dd>
+<dt>req.query</dt><dd>Arguments</dd>
+<dt>req.body</dt><dd>Arguments</dd>
 
-</ul>
+</dl>
+</div>
 
 <aside class="notes">
 <p>
-This is a simplification, but gets the important components of an HTTP request.
+So you send a request, it arrives at the server process, but what does the server process see?
+</p>
+
+<p>
+There are some other properties as well, but these get the important components of an HTTP request. The main parts that we will be working with.
 </p>
 
 <p>
 Right now this seems a bit abstract but we will look more into it. Remember to think about it as defining a computer language. Suppose Moe and I are computers and I am trying to send him a request. The computers communicate something like:
 I'm sending you a request. The method is "GET". The endpoint is "/users". The arguments are "id=3".
+</p>
+
+<p>
+We don't need to understand what the request looks like in the network, but are focused on what it looks like when received by an http server.
+</p>
+
+<p>
+You send a request. It arrives at the server. What does the server see? It receives a request object. 
+</p>
+
+<p>
+Different ways of sending arguments. Mostly by convention. We will touch more on the different approaches later.
+</p>
+
+<p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers</a>
+</p>
+
+<p>
+Enter a page into the browser and show the get request.
 </p>
 
 </aside>
@@ -157,33 +218,38 @@ These are conventions!
 </p>
 
 <p>
-<code>/test/demo_form.php?name1=value1&amp;name2=value2</code>
+Show the requests in the network panel and their associated http methods.
 </p>
 
 </aside>
 
 </section>
 <section id="slide-2-5">
-<h3 id="2-5"><span class="section-number-3">2.5</span> What does an HTTP request endpoint look like?</h3>
+<h3 id="2-5"><span class="section-number-3">2.5</span> What does an HTTP request path look like?</h3>
 <p>
-Example endpoints:
+Example paths:
 </p>
 <ul>
-<li><code>https://example.com/</code></li>
-<li><code>https://example.com/en-US/docs/Learn/</code></li>
-<li><code>https://example.com/users</code></li>
-<li><code>https://example.com/leaderboard</code></li>
-<li><code>https://developer.mozilla.org/en-US/docs/</code></li>
+<li><code>/</code></li>
+<li><code>/en-US/docs/Learn/</code></li>
+<li><code>/users/</code></li>
+<li><code>/leaderboard/</code></li>
+<li><code>/profile/</code></li>
+<li><code>/wiki/Main_Page/</code></li>
 
 </ul>
 
 <aside class="notes">
 <p>
-Simplification.
+Show the paths in the network panel.
 </p>
 
 <p>
-Really the domain is handled separately from http, and http just carries the path at the end.
+They specify a specific resource.
+</p>
+
+<p>
+Show the path from the network tab of the website.
 </p>
 
 </aside>
@@ -191,72 +257,74 @@ Really the domain is handled separately from http, and http just carries the pat
 </section>
 <section id="slide-2-6">
 <h3 id="2-6"><span class="section-number-3">2.6</span> What do HTTP request arguments look like?</h3>
-<p>
-Think of the request arguments as a list of key value pairs sent along with the request.
-</p>
-<ul>
-<li>key1: value1</li>
-<li>key2: value2</li>
+<pre class="example">
+# PARAMS
+# for specifying a "dynamic" resource
+# i.e. fetch a user who has id 123
+/users/123
 
-</ul>
+# QUERY
+# for specifying query filters
+# i.e. fetch a list of programer users
+/users?occupation=programer 
 
-</section>
-<section id="slide-2-7">
-<h3 id="2-7"><span class="section-number-3">2.7</span> Putting the parts of an HTTP request together</h3>
-<p>
-Suppose we type the following into a web browser:
-</p>
-
-
-<div id="orga5d409b" class="figure">
-<p><img src="https://doepud.co.uk/images/blogs/complex_url.png" alt="complex_url.png" />
-</p>
-</div>
-
-</section>
-<section id="slide-2-8">
-<h3 id="2-8"><span class="section-number-3">2.8</span> How does a server know what to do when it receives a request?</h3>
-<p>
-Think of requests in terms of remote code execution:
-</p>
-<ul>
-<li>the server uses the request method and endpoint in order to decide on a "function" it should run</li>
-<li>the server passes the request arguments to the function and runs it</li>
-<li>the server responds with the result of the function</li>
-
-</ul>
+# BODY
+# for sending data to be uploaded to the server
+# doesn't appear in a url. attached to a request programmatically
+{
+  "username": "cole"
+  "password": "password"
+}
+</pre>
 
 <aside class="notes">
 <p>
-No request arguments when making a simple page request.
+So now we understand that http requests have methods and arguments for helping a server understand a client's request, but what about arguments. How do you specify that you want to see a specific user's profile, or that you only want to fetch a list of programmers, or send over a username and password?
 </p>
 
 <p>
-Here the "server" is really the backend process that is running on the server. The server uses the port number to identify which process it should forward the request to.
+Let's look at that now.
 </p>
 
 <p>
-If you request /leaderboard a different function will run than if you request /users.
-(sometimes there aren't any request arguments)
+By "upload" I mean that the data is being used to permanently modify the server state, most commonly by adding it to a database.
 </p>
 
 <p>
-Example is simple web page. Think of the function as a simple function that takes no arguments and returns the same string everytime.
+We mentioned that there are a few different ways of sending arguments. How do you know which to use?
+Show the arguments int he network panel.
 </p>
 
 <p>
-A helpful view is to see HTTP requests as a way for one machine to request that another machine runs a certain function with certain parameters and return the results back to your local computer.
+There are a couple different ways of sending arguments.
 </p>
 
 <p>
-The server doesn't do anything when it isn't getting requests. It is just waiting for requests to come in.
+As a best practice, almost of developers are recommending following way. If you want to identify a resource, you should use Path Variable. But if you want to sort or filter items, then you should use query parameter.
+</p>
+
+<p>
+Body is used for sending data to be uploaded
+</p>
+
+<p>
+/users # Fetch a list of users
+/users/123 # Fetch a user who has id 123
+</p>
+
+<p>
+Show the arguments in the network requests page.
+</p>
+
+<p>
+Show google search as an example of query arguments.
 </p>
 
 </aside>
 
 </section>
-<section id="slide-2-9">
-<h3 id="2-9"><span class="section-number-3">2.9</span> What about an HTTP response?</h3>
+<section id="slide-2-7">
+<h3 id="2-7"><span class="section-number-3">2.7</span> What about an HTTP response?</h3>
 <div class="column" style="float:left; width: 50%">
 <p>
 Responses are shaped very similar to requests. The main notable difference is that in the place of method types they have status codes.
@@ -277,56 +345,106 @@ Responses are shaped very similar to requests. The main notable difference is th
 Again, the status code meanings are convention! Theoretically you could response with whatever status code you want as long as the client knows how to handle it.
 </p>
 
+<p>
+Show what 200 and 404 and 500 error pages look like.
+</p>
+
+<p>
+Two categories of responses:
+</p>
+<ul>
+<li>html responses</li>
+<li>json responses</li>
+
+</ul>
+
+<p>
+html response is for displaying a page
+json response is for getting data to update the page with.
+</p>
+
 </aside>
+
 </section>
-<section id="slide-2-10">
-<h3 id="2-10"><span class="section-number-3">2.10</span> Entering a url into a browser</h3>
+<section id="slide-2-8">
+<h3 id="2-8"><span class="section-number-3">2.8</span> Server Request Handling: HTTP Request Recap</h3>
+<div style="font-size: 1.5rem">
+<p>
+The server receives a <code>req</code> (request) object with the following properties:
+</p>
+<dl>
+<dt>req.method</dt><dd>Categorizes the intention of the request</dd>
+<dt>req.path</dt><dd>Path to the requested resource</dd>
+<dt>req.header</dt><dd>Request meta data</dd>
+<dt>req.params</dt><dd>Arguments</dd>
+<dt>req.query</dt><dd>Arguments</dd>
+<dt>req.body</dt><dd>Arguments</dd>
+
+</dl>
+
+<p>
+The server replies to the client with a response object. The client can then update the UI based on the response.
+</p>
+</div>
+
 <aside class="notes">
 <p>
-Learn by understanding what happens when you enter a url into the browser.
+You write code that takes the request information and perform the action you're interested in.
 </p>
-
-<p>
-For our purposes it isn't important to understand things like DNS.
-</p>
-
-<p>
-Extra info:
-</p>
-<ul>
-<li>The browser goes to the domain name server, which provides a map for getting to the server relevant to the domain</li>
-<li>The request is sent to a specific port on the server. This lets the server know which process should handle the request.</li>
-<li></li>
-
-</ul>
 
 </aside>
-
-
-<div id="org149cff8" class="figure">
-<p><img src="https://doepud.co.uk/images/blogs/complex_url.png" alt="complex_url.png" />
-</p>
-</div>
-<div class="column" style="text-align: left; font-size: 0.8em">
-<ul>
-<li>The browser dispatches a GET request to the server linked with the domain name.</li>
-<li>The server receives and runs a function based on the request, and then sends back the web page</li>
-<li>Your computer receives the response and the browser displays the website to you</li>
-
-</ul>
-</div>
-
 
 </section>
 </section>
 <section>
 <section id="slide-3">
-<h2 id="3"><span class="section-number-2">3</span> Coding Our First Server</h2>
+<h2 id="3"><span class="section-number-2">3</span> Postman Demo</h2>
+<p>
+CRUD:
+</p>
+
+<ul>
+<li>Create todo</li>
+<li>Read todos</li>
+<li>Update todo</li>
+<li>Delete todo</li>
+
+</ul>
+
+<aside class="notes">
+<p>
+Take what we've learned and see it in action with postman.
+</p>
+
+<p>
+We've looked at the network requests panel, which is an amazing resource. Now i'm going to introduce you guys to a piece of software called postman. It's purpose is to help you craft http requests in order to test and understand server processes.
+</p>
+
+<p>
+Show them:
+</p>
+<ul>
+<li>each of the app endpoints</li>
+<li>error requests</li>
+
+</ul>
+
+<p>
+CRUD is an acronym that encomposes the basic functionalities of most apis, which are to create, read, update, and delete.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-4">
+<h2 id="4"><span class="section-number-2">4</span> Coding Our First Server</h2>
 <p>
 Many technologies exist for you to write backends in your favorite programming languages!
 </p>
 <ul>
-<li>Express (Javascript)</li>
+<li>Express (Javascript/Node)</li>
 <li>Flask (Python)</li>
 <li>Spring (Java)</li>
 <li>Ruby on Rails (Ruby)</li>
@@ -358,38 +476,8 @@ Node web server with and without framework:
 </aside>
 
 </section>
-<section id="slide-3-1">
-<h3 id="3-1"><span class="section-number-3">3.1</span> Functions</h3>
-<div class="org-src-container">
-
-<pre class="src src-javascript"><span style="color: #4f97d7; font-weight: bold;">import</span> <span style="color: #4f97d7;">{</span> Router <span style="color: #4f97d7;">}</span> from <span style="color: #2d9574;">'express'</span>
-<span style="color: #4f97d7; font-weight: bold;">import</span> <span style="color: #4f97d7;">{</span> getTodos, addTodo, updateTodo, deleteTodo <span style="color: #4f97d7;">}</span> from <span style="color: #2d9574;">'../controllers/todos'</span>
-
-<span style="color: #4f97d7; font-weight: bold;">const</span> <span style="color: #7590db;">router</span>: Router = Router<span style="color: #4f97d7;">()</span>
-
-router.get<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'/todos'</span>, getTodos<span style="color: #4f97d7;">)</span>
-router.post<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'/add-todo'</span>, addTodo<span style="color: #4f97d7;">)</span>
-router.put<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'/edit-todo/:id'</span>, updateTodo<span style="color: #4f97d7;">)</span>
-router.<span style="color: #4f97d7; font-weight: bold;">delete</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'/delete-todo/:id'</span>, deleteTodo<span style="color: #4f97d7;">)</span>
-
-<span style="color: #4f97d7; font-weight: bold;">export</span> <span style="color: #4f97d7; font-weight: bold;">default</span> router
-</pre>
-</div>
-
-<aside class="notes">
-<p>
-Sneak peak from later workshop.
-</p>
-
-<p>
-Demonstrates idea as each route/endpoint being responsible for a function.
-</p>
-
-</aside>
-
-</section>
-<section id="slide-3-2">
-<h3 id="3-2"><span class="section-number-3">3.2</span> Hello World</h3>
+<section id="slide-4-1">
+<h3 id="4-1"><span class="section-number-3">4.1</span> Hello World</h3>
 <div class="org-src-container">
 
 <pre class="src src-javascript"><span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">import the express framework</span>
@@ -398,11 +486,13 @@ Demonstrates idea as each route/endpoint being responsible for a function.
 <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">initialize an express app</span>
 <span style="color: #4f97d7; font-weight: bold;">const</span> <span style="color: #7590db;">app</span> = express<span style="color: #4f97d7;">()</span>
 
+<span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">simple hello world function</span>
+<span style="color: #4f97d7; font-weight: bold;">const</span> <span style="color: #7590db;">helloWorld</span> = <span style="color: #4f97d7;">(</span>req, res<span style="color: #4f97d7;">)</span> =&gt; <span style="color: #4f97d7;">{</span>
+  res.send<span style="color: #bc6ec5;">(</span><span style="color: #2d9574;">'Hello World!'</span><span style="color: #bc6ec5;">)</span>
+<span style="color: #4f97d7;">}</span>
+
 <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">tell the express app to handle requests on endpoint '/'</span>
-app.get<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'/'</span>, <span style="color: #bc6ec5;">(</span>req, res<span style="color: #bc6ec5;">)</span> =&gt; <span style="color: #bc6ec5;">{</span>
-  <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">tell the express app to respond with 'Hello World!'</span>
-  res.send<span style="color: #2d9574;">(</span><span style="color: #2d9574;">'Hello World!'</span><span style="color: #2d9574;">)</span>
-<span style="color: #bc6ec5;">}</span><span style="color: #4f97d7;">)</span>
+app.get<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'/'</span>, helloWorld<span style="color: #4f97d7;">)</span>
 
 <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">tell the express app to start listening on port 3000</span>
 <span style="color: #4f97d7; font-weight: bold;">const</span> <span style="color: #7590db;">port</span> = <span style="color: #a45bad;">3000</span>
@@ -434,20 +524,33 @@ req has info like:
 The res object represents the HTTP response that an Express app sends back when handling an HTTP request.
 </p>
 
-</aside>
-
-</section>
-<section id="slide-3-3">
-<h3 id="3-3"><span class="section-number-3">3.3</span> Postman Demo</h3>
 <p>
-Let's have some fun with postman!
+Uses call back function. Calls the function after receiving the request. The function gets access to the request and response objects. Calling res.send() sends a response.
 </p>
+
+<p>
+Run the code locally and call it with postman.
+</p>
+
+</aside>
 
 </section>
 </section>
 <section>
-<section id="slide-4">
-<h2 id="4"><span class="section-number-2">4</span> Resources</h2>
+<section id="slide-5">
+<h2 id="5"><span class="section-number-2">5</span> Next Steps</h2>
+<ul>
+<li>Next workshop you will start coding the app. Please come with <a href="https://nodejs.org/en/">nodejs</a> and <a href="https://docs.docker.com/get-docker/">docker</a> installed.</li>
+<li>In the mean time, try to run the hello world server on your local machine! :)</li>
+<li>Thanks for coming today!</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-6">
+<h2 id="6"><span class="section-number-2">6</span> Resources</h2>
 <p>
 MDN is your friend: <a href="https://developer.mozilla.org/en-US/docs/Learn">Learn web development</a>
 </p>
@@ -465,11 +568,11 @@ Helpful links:
 </section>
 </div>
 </div>
-<script src="file:///home/cole/Projects/reveal.js/dist/reveal.js"></script>
-<script src="file:///home/cole/Projects/reveal.js/plugin/markdown/markdown.js"></script>
-<script src="file:///home/cole/Projects/reveal.js/plugin/notes/notes.js"></script>
-<script src="file:///home/cole/Projects/reveal.js/plugin/search/search.js"></script>
-<script src="file:///home/cole/Projects/reveal.js/plugin/zoom/zoom.js"></script>
+<script src="reveal.js/dist/reveal.js"></script>
+<script src="reveal.js/plugin/markdown/markdown.js"></script>
+<script src="reveal.js/plugin/notes/notes.js"></script>
+<script src="reveal.js/plugin/search/search.js"></script>
+<script src="reveal.js/plugin/zoom/zoom.js"></script>
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
